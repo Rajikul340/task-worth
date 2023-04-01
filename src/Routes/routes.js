@@ -7,6 +7,7 @@ import Signup from "../pages/Signup";
 import Dashboard from "../Layout/Dashboard/DashboarLayout";
 import DashboardLayout from "../Layout/Dashboard/DashboarLayout";
 import PostContent from "../components/dashboard/postContent";
+import TaskDetails from "../components/TaskDetails";
 
  export const routes = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ import PostContent from "../components/dashboard/postContent";
           path: "/signup",
           element: <Signup />,
         },
+        {
+            path:"/job-details/:id",
+            element:<TaskDetails/>
+        }
     
       ],
     },
@@ -35,7 +40,8 @@ import PostContent from "../components/dashboard/postContent";
             {
                 path:"/dashboard",
                 element:<PostContent/>
-            }
+            },
+         
            
         ]
      }
