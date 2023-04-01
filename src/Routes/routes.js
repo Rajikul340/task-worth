@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Dashboard from "../Layout/Dashboard/DashboarLayout";
 import DashboardLayout from "../Layout/Dashboard/DashboarLayout";
+import PostContent from "../components/dashboard/postContent";
 
  export const routes = createBrowserRouter([
     {
@@ -31,22 +32,11 @@ import DashboardLayout from "../Layout/Dashboard/DashboarLayout";
         path:"/dashboard",
         element:<DashboardLayout/>,
         children:[
-            // {
-            //     path:"/dashboard",
-            //     element:<PostContent/>
-            // },
-            // {
-            //     path:"/dashboard/content",
-            //     element: <PostContent/>
-            // },
-            // {
-            //     path:"/dashboard/contentList",
-            //     element:<ContentList/>
-            // },
-            // {
-            //     path:"/dashboard/contentList/:id",
-            //     element: <UpdatePage/>
-            // }
+            {
+                path:"/dashboard",
+                element:<PostContent/>
+            }
+           
         ]
      }
   ]);
