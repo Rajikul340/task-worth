@@ -1,6 +1,6 @@
 ### task-worth Project
 <p>server side : https://github.com/Rajikul340/task-worth-server</p>
-#### features
+### features -
 * admin dashboard
 * admin can add any task 
 * admin can update and delete their task
