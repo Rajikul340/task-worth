@@ -1,13 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-
-
+import deleteProduct from "../redux/thunk/DeleteContent";
 
 const ListItems = ({ data, index }) => {
- 
-      console.log('data', data);
-   const navigate = useNavigate();
+  // console.log('data', data);
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const {
     _id,
@@ -19,7 +18,6 @@ const ListItems = ({ data, index }) => {
     requirements,
   } = data || {};
 
- 
   return (
     <tr>
       <th>{index + 1}</th>
@@ -27,11 +25,14 @@ const ListItems = ({ data, index }) => {
       <td>{companyName}</td>
       <td>{location}</td>
       <td className="flex gap-2">
-        <button 
-         onClick={()=>navigate(`/dashboard/update_page/${data._id}`)}
-        className="btn btn-sm btn-primary btn-outline">Edit</button>
-          <button
-          // onClick={() => dispatch(deleteProduct(data._id))}
+        <button
+          onClick={() => navigate(`/dashboard/update_page/${data._id}`)}
+          className="btn btn-sm btn-primary btn-outline"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => dispatch(deleteProduct(data._id))}
           className=" btn btn-sm btn-primary btn-outline"
         >
           Delete

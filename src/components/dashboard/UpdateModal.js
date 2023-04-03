@@ -2,38 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { FiTrash } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GetContent } from "../../redux/thunk/getContent";
+import { updateDataAsync } from "../../redux/thunk/UpdateContent";
+
 
 const UpdateModal = () => {
   const { handleSubmit, register, reset, control } = useForm();
-
+ const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const { contentData } = useSelector((state) => state.content);
   console.log(contentData);
-
+ 
   useEffect(() => {
     dispatch(GetContent());
   }, [dispatch]);
 
   const newData = contentData?.filter((singleData) => singleData._id === id);
   console.log(newData);
-  // const {
-  //   _id,
-  //   position,
-  //   companyName,
-  //   location,
-  //   employmentType,
-  //   experience,
-  //   overview,
-  //   workLevel,
-  //   requirements,
-  //   responsibilities,
-  //   skills,
-  //   salaryRange,
-  // } = newData || {};
+
 
   const {
     fields: resFields,
@@ -52,7 +40,16 @@ const UpdateModal = () => {
   } = useFieldArray({ control, name: "requirements" });
 
   const onSubmit = (DATA) => {
-    console.log(DATA);
+    const  updateData ={
+      _id: id,
+       position: DATA.position,
+      companyName: DATA.companyName,
+      location: DATA.location,
+      employmentType: DATA.employmentType
+    }
+    console.log(updateData);
+    dispatch(updateDataAsync(updateData));
+    
   };
 
   return (
