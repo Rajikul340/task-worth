@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
-import PrivateRoute from "./PrivateRoute";
 import Main from "../Layout/Main/Main";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import Dashboard from "../Layout/Dashboard/DashboarLayout";
 import DashboardLayout from "../Layout/Dashboard/DashboarLayout";
 import PostContent from "../components/dashboard/postContent";
 import TaskDetails from "../components/TaskDetails";
+import UpdatePage from "../pages/UpdatePage";
+import UpdateModal from "../components/dashboard/UpdateModal";
+
 
  export const routes = createBrowserRouter([
     {
@@ -29,7 +30,8 @@ import TaskDetails from "../components/TaskDetails";
         {
             path:"/job-details/:id",
             element:<TaskDetails/>
-        }
+        },
+       
     
       ],
     },
@@ -38,9 +40,17 @@ import TaskDetails from "../components/TaskDetails";
         element:<DashboardLayout/>,
         children:[
             {
-                path:"/dashboard",
+                path:"/dashboard/add-content",
                 element:<PostContent/>
             },
+            {
+              path:"/dashboard/update_page",
+              element:<UpdatePage/>
+            },
+            {
+              path:"/dashboard/update_page/:id",
+              element:<UpdateModal/>
+            }
          
            
         ]

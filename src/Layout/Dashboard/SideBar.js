@@ -20,7 +20,7 @@ const SideBar = () => {
           >
             <Link
               className="capitalize hover:text-[#8B8B8B]  md:text-lg pointer md:pl-3 md:pr-20  px-2"
-              to="/dashboard/content"
+              to="/dashboard/add-content"
             >
                Add to task 
             </Link>
@@ -34,9 +34,9 @@ const SideBar = () => {
           >
             <Link
               className="capitalize md:text-lg hover:text-[#8B8B8B]  pointer md:pl-3 md:pr-20  px-2"
-              to="/dashboard/contentList"
+              to="/dashboard/update_page"
             >
-              Task  list
+             Update Task 
             </Link>
           </button>
         </li>

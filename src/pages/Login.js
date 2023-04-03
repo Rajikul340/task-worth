@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { googleLogin, loginUser } from "../features/auth/authSlice";
+import SmallSpinner from "../components/Spinner/SmallSpinner";
+import { loginUser, signInUser } from "../redux/action/actionCreators";
+
 
 
 
@@ -12,29 +14,34 @@ const Login = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {isLoading, email, error, isError} = useSelector((state)=>state.auth) ;
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("")
+
+
+  // const  {isLoading, isError} = useSelector((state)=>state.auth) ;
+  
   
 
-   useEffect(()=>{
-     if(!isLoading && email){
-       navigate("/")
-     }
-   },[isLoading, email])
+  //  useEffect(()=>{
+  //    if(!isLoading ){
+  //     
+  //     
+  //    }
+  //  },[isLoading, navigate])
+
   const onSubmit = (data) => {
     console.log(data);
-    dispatch(loginUser({ email: data.email, password: data.password }));
+    dispatch(loginUser(data, setError));
+    navigate("/")
+    toast.success("login successful")
   };
 
-   const handleGoogleLogin = ()=>{
-     dispatch(googleLogin())
-     
-   }
 
-useEffect(()=>{
-          if(isError){
-            toast.error(error)
-          }
-},[])
+// useEffect(()=>{
+//           if(isError){
+//             toast.error(error)
+//           }
+// },[error, isError])
 
   return (
     <div className=" md:w-2/5 md:mx-auto md:mt-5">
@@ -63,9 +70,9 @@ useEffect(()=>{
               <div className="relative !mt-8">
                 <button
                   type="submit"
-                  className="font-bold text-white py-3 rounded-full bg-primary w-full"
+                  className="font-bold text-white py-3 mx-auto rounded-full bg-primary w-full"
                 >
-                  Login
+                     login 
                 </button>
               </div>
               
@@ -84,7 +91,7 @@ useEffect(()=>{
             </div>
           </form>
           <button
-                onClick={handleGoogleLogin}
+                // onClick={handleGoogleLogin}
                   type="submit"
                   className="font-bold text-white py-3 rounded-full bg-primary w-60"
                 >
