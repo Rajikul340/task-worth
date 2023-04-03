@@ -6,7 +6,7 @@ export const updateDataAsync = (data) => async (dispatch) => {
         
     const {successMessage} =AlertMessage();
     try {
-      const response = await fetch(` http://localhost:5000/update_task/${data._id}`, {
+      const response = await fetch(`https://task-worth-server.vercel.app/update_task/${data._id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {

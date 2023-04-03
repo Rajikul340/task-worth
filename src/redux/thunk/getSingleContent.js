@@ -7,7 +7,7 @@ export const GetSingleContent = (id) => {
     try {
   
       dispatch({ type: GET_CONTENT_REQUEST});
-      const response = await fetch(` http://localhost:5000/get_task/${id}`);
+      const response = await fetch(`https://task-worth-server.vercel.app/get_task/${id}`);
       const data = await response.json();
       dispatch({ type: GET_CONTENT_SUCCESS, payload: data });
     } catch (error) {

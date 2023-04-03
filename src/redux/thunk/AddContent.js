@@ -8,7 +8,7 @@ const addContentData = (contents) =>{
        const {successMessage} = AlertMessage()
 
     return async (dispatch, getState)=>{
-    const res= await fetch("  http://localhost:5000/add_task", {
+    const res= await fetch(" https://task-worth-server.vercel.app/add_task", {
         method:"POST",
         body: JSON.stringify(contents),
         headers: {

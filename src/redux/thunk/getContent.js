@@ -8,7 +8,7 @@ export const GetContent = () => {
     try {
   
       dispatch({ type: GET_CONTENT_REQUEST});
-      const response = await fetch(` http://localhost:5000/get_task`);
+      const response = await fetch(`https://task-worth-server.vercel.app/get_task`);
       const data = await response.json();
       dispatch({ type: GET_CONTENT_SUCCESS, payload: data });
     } catch (error) {
