@@ -4,6 +4,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { FiTrash } from "react-icons/fi";
 import addContentData from "../../redux/thunk/AddContent";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const PostContent = () => {
   const { handleSubmit, register, reset, control } = useForm();
@@ -26,8 +27,8 @@ const PostContent = () => {
   } = useFieldArray({ control, name: "requirements" });
 
   const onSubmit = (data) => {
-    dispatch(addContentData(data));
-     navigate('/')
+     console.log(data);
+    dispatch(addContentData(data))
     reset();
   };
 

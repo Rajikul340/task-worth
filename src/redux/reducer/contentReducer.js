@@ -13,11 +13,12 @@ const initialContentState = {
   contentData: [],
   error: "",
   updateData: [],
+  contents: []
  
 };
 
  const contentReducer = (state = initialContentState, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
 
   switch (action.type) {
   

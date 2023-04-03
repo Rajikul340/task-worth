@@ -13,14 +13,14 @@ const UpdateModal = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { contentData } = useSelector((state) => state.content);
-  console.log(contentData);
+  // console.log(contentData);
  
   useEffect(() => {
     dispatch(GetContent());
   }, [dispatch]);
 
   const newData = contentData?.filter((singleData) => singleData._id === id);
-  console.log(newData);
+  // console.log(newData);
 
 
   const {
@@ -45,7 +45,12 @@ const UpdateModal = () => {
        position: DATA.position,
       companyName: DATA.companyName,
       location: DATA.location,
-      employmentType: DATA.employmentType
+      employmentType: DATA.employmentType,
+      salaryRange: DATA.salaryRange,
+      workLevel: DATA.workLevel,
+      overview:DATA.overview,
+      experience:DATA.experience,
+      
     }
     console.log(updateData);
     dispatch(updateDataAsync(updateData));

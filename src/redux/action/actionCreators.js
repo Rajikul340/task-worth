@@ -1,5 +1,11 @@
-
-import { ADD_CONTENT, DELETE_CONTENT, GET_UPDATE_CONTENT, RESET_USER, SET_USER, UPDATE_CONTENT } from "./actionTypes";
+import {
+  ADD_CONTENT,
+  DELETE_CONTENT,
+  GET_UPDATE_CONTENT,
+  RESET_USER,
+  SET_USER,
+  UPDATE_CONTENT,
+} from "./actionTypes";
 import app from "../../firebase/firebase.config";
 
 const setUser = (data) => ({
@@ -14,23 +20,21 @@ const resetUser = () => ({
 export const registerUser =
   ({ name, email, password }, setError) =>
   (dispatch) => {
-   app.auth()
+    app
+      .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
         setError("");
-     
-        app
-        .auth().currentUser.updateProfile({
+
+        app.auth().currentUser.updateProfile({
           displayName: name,
         });
-          dispatch(
-            setUser({
-              userId: user.user.uid,
-              user: { data: user.user.providerData[0] },
-            })
-          );
-        
-     
+        dispatch(
+          setUser({
+            userId: user.user.uid,
+            user: { data: user.user.providerData[0] },
+          })
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -44,10 +48,28 @@ export const loginUser =
   ({ email, password }, setError) =>
   (dispatch) => {
     app
-    .auth()
+      .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(async (user) => {
-             console.log(user);
+      .then( (user) => {
+         const currentUser ={
+            email:user.user.email
+         }
+          fetch ('http://localhost:5000/jwt',{
+                   method:"POST",
+                   headers:{
+                    'content-type' :'application/json'
+                   }    ,
+                   body: JSON.stringify(currentUser)
+         }
+         )
+         .then(res=>res.json())
+         .then(data=>{
+          console.log('token user data', data);
+          localStorage.setItem("token", data.token)
+         })
+       
+
+        console.log("login user ", );
       })
       .catch(() => {
         setError("Invalid Email Or Password!");
@@ -69,16 +91,16 @@ export const getUser = () => (dispatch) => {
   });
 };
 
-
 export const logoutUser = () => (dispatch) => {
- app.auth().signOut().then(() => {
-    dispatch(resetUser());
-   
-  });
+  app
+    .auth()
+    .signOut()
+    .then(() => {
+      dispatch(resetUser());
+    });
 };
 
-
- //content action
+//content action
 
 export const addContent = (content) => {
   return {
@@ -97,17 +119,14 @@ export const removeContent = (id) => {
 export const updateData = (id, newData) => ({
   type: UPDATE_CONTENT,
   payload: {
-     id,
-      newData },
+    id,
+    newData,
+  },
 });
 
-
-
-
-export const getUpdatedata =(data)=>{
-         return {
-          type: GET_UPDATE_CONTENT,
-          payload: data
-         }
-}
-
+export const getUpdatedata = (data) => {
+  return {
+    type: GET_UPDATE_CONTENT,
+    payload: data,
+  };
+};

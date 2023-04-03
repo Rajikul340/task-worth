@@ -8,6 +8,8 @@ import PostContent from "../components/dashboard/postContent";
 import TaskDetails from "../components/TaskDetails";
 import UpdatePage from "../pages/UpdatePage";
 import UpdateModal from "../components/dashboard/UpdateModal";
+import PrivateRoute from "./PrivateRoute";
+import WelCome from "../components/WelCome";
 
 
  export const routes = createBrowserRouter([
@@ -39,6 +41,10 @@ import UpdateModal from "../components/dashboard/UpdateModal";
         path:"/dashboard",
         element:<DashboardLayout/>,
         children:[
+          {
+                path:"/dashboard",
+                element: <WelCome/>
+          },
             {
                 path:"/dashboard/add-content",
                 element:<PostContent/>

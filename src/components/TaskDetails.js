@@ -7,20 +7,23 @@ const TaskDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { contentData } = useSelector((state) => state.content);
-  console.log(contentData);
+  // console.log(contentData);
 
   useEffect(() => {
     dispatch(GetContent());
   }, [dispatch]);
 
-  const newData = contentData?.filter((singleData) => singleData._id === id);
+  const newData =
+    Array.isArray(contentData) &&
+    contentData.length > 0 &&
+    contentData.filter((singleData) => singleData._id === id);
 
-  console.log(newData);
+  // console.log(newData);
 
   return (
     <div className="card  bg-[#eceae8] md:m-10 rounded-lg md:w-10/12 md:mx-auto shadow-xl">
       <h5 className="text-xl  font-semibold p-5">Descriptioon </h5>
-      {newData?.map((data) => (
+       { Array.isArray(newData) && newData?.map((data) => (
         <div>
           <div className="card-body">
             <h2 className="card-title text-xl capitalize">
